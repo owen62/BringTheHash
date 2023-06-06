@@ -1,0 +1,2 @@
+# BringMeTheHash
+Python HashCracking Tool
