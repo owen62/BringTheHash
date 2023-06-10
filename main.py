@@ -21,6 +21,8 @@ def info():
     print ("[>] md5, sha1, sha224, sha256, sha384, sha512")
     print ("[*] That's all folks!\n")
 
+
+
 def CreatingHash(value, hashtype, verbose):
     if "md5" in hashtype:
         h = hashlib.md5(value.encode()).hexdigest()
@@ -36,29 +38,37 @@ def CreatingHash(value, hashtype, verbose):
         h = hashlib.sha1(value.encode()).hexdigest()
     else:
         print("[-] I think this is not a supported hash type")
+        exit()
+
+
 
 def start(argv):
+    value = None
+    hashtype =None
+    verbose = None
     banner()
-    if len(sys.argv) < 3:
-        info()
-        sys.exit()
     try:
-        opts, argv = getopt.getopt(argv, "h:v:t:o")
+        opts, argv = getopt.getopt(argv, "h:v:t")
     except getopt.GetoptError:
         print("[!!] Error on argument ")
-        sys.exit()
+        sys.exit(1)
+
     for opt, arg in opts:
         if opt == "-h":
             info()
-        elif opt == "-v":
+            sys.exit()
+        elif opt == ("-v","--value"):
             value = arg
-        elif opt == "-t":
-            value = arg
+        elif opt == ("-t","--hashtype"):
+            hashtype = arg
         else :
             info()
+            sys.exit()
 
 if __name__ == "__main__":
     start(sys.argv)
+
+
 
 """
 hash_type = input("Hash type desired : ")
