@@ -26,6 +26,26 @@ def info():
     print("[*] That's all folks!\n")
 
 
+class hashCracking:
+    def CreatingHash(self, value, hashtype):
+        if "md5" in hashtype:
+            v = hashlib.md5(value.encode()).hexdigest()
+        elif "sha1" in hashtype:
+            v = hashlib.sha1(value.encode()).hexdigest()
+        elif "sha224" in hashtype:
+            v = hashlib.sha1(value.encode()).hexdigest()
+        elif "sha256" in hashtype:
+            v = hashlib.sha1(value.encode()).hexdigest()
+        elif "sha384" in hashtype:
+            v = hashlib.sha1(value.encode()).hexdigest()
+        elif "sha512" in hashtype:
+            v = hashlib.sha1(value.encode()).hexdigest()
+        else:
+            print("[-] I think this is not a supported hash type")
+            exit()
+        return v
+
+
 def start(argv):
     value = None
     hashtype = None
@@ -35,7 +55,7 @@ def start(argv):
         opts, args = getopt.getopt(argv, "ih:v:t:", ["info", "value=", "type="])
     except getopt.GetoptError:
         print('[*] ./main.py -v <value> -t <type> ')
-        print('[*] Type ./main.py -i for information')
+        print('[*] ./main.py -i for information')
         sys.exit(1)
 
     for opt, arg in opts:
@@ -47,32 +67,26 @@ def start(argv):
         elif opt in ["-t", "--type"]:
             hashtype = arg
 
-    print(hashtype)
-    print(value)
-
     if not (value and hashtype):
+        print('[*] ./main.py -i for information')
         print('[*] ./main.py -v <value> -t <type>')
         sys.exit()
+
+    print("[*] value: %s" % value)
+    print("[*] Hash type: %s" % hashtype)
+    print("[+] Hash creation...")
+
+    try:
+        v= hashCracking()
+        hash_value = v.CreatingHash(value, hashtype)
+        print("[+] Hash value:", hash_value)
+
+    except IndexError:
+        print("\n[-] Hash not created:")
+
+    except KeyboardInterrupt:
+        print("\n[Exiting...]")
 
 
 if __name__ == "__main__":
     start(sys.argv[1:])
-
-
-
-def CreatingHash(value, hashtype):
-    if "md5" in hashtype:
-        v = hashlib.md5(value.encode()).hexdigest()
-    elif "sha1" in hashtype:
-        v = hashlib.sha1(value.encode()).hexdigest()
-    elif "sha224" in hashtype:
-        v = hashlib.sha1(value.encode()).hexdigest()
-    elif "sha256" in hashtype:
-        v = hashlib.sha1(value.encode()).hexdigest()
-    elif "sha384" in hashtype:
-        v = hashlib.sha1(value.encode()).hexdigest()
-    elif "sha512" in hashtype:
-        v = hashlib.sha1(value.encode()).hexdigest()
-    else:
-        print("[-] I think this is not a supported hash type")
-        exit()
