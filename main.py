@@ -2,44 +2,40 @@ import hashlib
 import pyfiglet
 import getopt
 import sys
-import os
-import time
 
 
 def banner():
-    ascii_banner = pyfiglet.figlet_format("BringMeTheHash")
-    print(ascii_banner)
+    b = pyfiglet.figlet_format("Bring The Hash")
+    print(b)
+    print("Version 1.0, made by Drackk")
     print("Hash Algorithm available: MD5 | SHA1 | SHA224 | SHA256 | SHA384 | SHA512")
-    print("Version 1.0 Made by Drackk")
-
 
 def info():
     print("")
     print("Information:")
     print("[*] Options:")
-    print("[*] (-i) info")
-    print("[*] (-v) value")
-    print("[*] (-t) hashtype [See supported hashes]")
-    print("[*] (-o) output")
+    print("[~] (-i) info")
+    print("[~] (-v) value")
+    print("[~] (-t) hashtype")
     print("[*] Supported Hashes:")
-    print("[>] md5, sha1, sha224, sha256, sha384, sha512")
-    print("[*] That's all folks!\n")
+    print("[~] md5, sha1, sha224, sha256, sha384, sha512")
+    print('[*] ./bringthehash.py -v <"value"> -t <hashtype> ')
 
 
 class hashCracking:
     def CreatingHash(self, value, hashtype):
         if "md5" in hashtype:
-            v = hashlib.md5(value.encode()).hexdigest()
+            v = hashlib.md5(value.encode('utf-8')).hexdigest()
         elif "sha1" in hashtype:
-            v = hashlib.sha1(value.encode()).hexdigest()
+            v = hashlib.sha1(value.encode('utf-8')).hexdigest()
         elif "sha224" in hashtype:
-            v = hashlib.sha1(value.encode()).hexdigest()
+            v = hashlib.sha1(value.encode('utf-8')).hexdigest()
         elif "sha256" in hashtype:
-            v = hashlib.sha1(value.encode()).hexdigest()
+            v = hashlib.sha1(value.encode('utf-8')).hexdigest()
         elif "sha384" in hashtype:
-            v = hashlib.sha1(value.encode()).hexdigest()
+            v = hashlib.sha1(value.encode('utf-8')).hexdigest()
         elif "sha512" in hashtype:
-            v = hashlib.sha1(value.encode()).hexdigest()
+            v = hashlib.sha1(value.encode('utf-8')).hexdigest()
         else:
             print("[-] I think this is not a supported hash type")
             exit()
@@ -52,10 +48,9 @@ def start(argv):
     banner()
 
     try:
-        opts, args = getopt.getopt(argv, "ih:v:t:", ["info", "value=", "type="])
+        opts, args = getopt.getopt(argv, "v:t:", ["info", "value=", "type="])
     except getopt.GetoptError:
-        print('[*] ./main.py -v <value> -t <type> ')
-        print('[*] ./main.py -i for information')
+        info()
         sys.exit(1)
 
     for opt, arg in opts:
@@ -68,8 +63,7 @@ def start(argv):
             hashtype = arg
 
     if not (value and hashtype):
-        print('[*] ./main.py -i for information')
-        print('[*] ./main.py -v <value> -t <type>')
+        info()
         sys.exit()
 
     print("[*] value: %s" % value)
