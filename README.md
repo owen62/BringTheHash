@@ -1,4 +1,4 @@
-# BringMeTheHash
+# BringTheHash
 
 ## Introduction
 BringTheHash is a simple python Hash Generator
