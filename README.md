@@ -5,8 +5,8 @@ BringTheHash is a simple python Hash Generator
 
 ## These are the available hashes :
 
-- MD5
 - MD4
+- MD5
 - SHA1
 - SHA224
 - SHA256
