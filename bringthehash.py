@@ -23,7 +23,8 @@ def info():
 
 class HashGenerator:
     def create_hash(self, value, hashtype):
-        supported_algorithms = ["md4", "md5", "sha1", "sha224", "sha256", "sha384", "sha512", "sha3_224", "sha3_256", "sha3_384", "sha3_512", "blake2s", "blake2b"]
+        supported_algorithms = ["md4", "md5", "sha1", "sha224", "sha256", "sha384", "sha512", "sha3_224", "sha3_256", "sha3_384", "sha3_512", "blake2s", "blake2b",
+                                "MD4", "MD5", "SHA1", "SHA224", "SHA256", "SHA384", "SHA512", "SHA3_224", "SHA3_256", "SHA3_384", "SHA3_512", "BLAKE2S", "BLAKE2B"]
         
         if hashtype not in supported_algorithms:
             print("[-] Unsupported hash type")
@@ -41,7 +42,7 @@ def start(argv):
     banner()
 
     try:
-        opts, args = getopt.getopt(argv, "v:t:", ["value=", "type="])
+        opts, args = getopt.getopt(argv, "v:t:", ["value=", "type="] )
     except getopt.GetoptError:
         info()
         sys.exit(1)
